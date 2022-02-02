@@ -1,0 +1,80 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}{% endblock %}
+
+{% block active_diary_list %}active{% endblock %}
+
+{% block contents %}
+<script type="text/javascript">
+    var counter = 1;
+    function plus() {
+        // プラス処理後、空欄のまま送信するとエラーを吐く
+        var clone_form = document.getElementById("forms");
+        var clone_e = clone_form.cloneNode(true);
+        document.getElementById('plus_f').appendChild(clone_e);
+
+        var name_counter_ob = document.getElementById('music' + String(counter));
+        var name_dcounter_ob = document.getElementById('delnum_' + String(counter));
+
+        document.getElementById('extra_counter');
+        extra_counter.value = counter;
+
+        counter = counter + 1;
+        name_counter_ob.id = "music" + String(counter);
+        name_counter_ob.name = "music" + String(counter);
+        // 削除する要素指定用のタグのインクリメント
+        name_dcounter_ob.id = "delnum_" + String(counter);
+        name_dcounter_ob.name = "delnum_" + String(counter);
+    };
+
+    function del(e){
+        e.parentNode.remove();
+    }
+</script>
+
+<div class="container">
+    <div class="row">
+        <div class="my-div-style w-100">
+            <div style="display: none;">
+            <div id="forms">
+                <table class="table">
+                    <input id="music1" type="text" autocomplete="on" list="select_bank2" name="music1" value="{{ value }}">
+                    <datalist id="select_bank2">
+                        {% for item in play_m_l %}
+                        <option value="{{ item }}">
+                        {% endfor %}
+                    </datalist>
+                    <input id="delnum_1" type="button" value="削除" onclick="del(this)"></button>
+                </table>
+            </div>
+            </div>
+            <form method="POST" enctype='multipart/form-data'>
+                <input id="extra_counter" style="display: none;" type="number" value=0 name="ex_counter">
+                {% csrf_token %}
+                <table class="table">
+                    プレイリスト名：
+                    <input id="m_g" type="text" autocomplete="on" list="select_bank1" name="m_gr" value="{{ value }}" required>
+                    <datalist id="select_bank1">
+                        {% for item in groups %}
+                        <option value="{{ item }}">
+                        {% endfor %}
+                    </datalist>
+                </table>
+                <table class="table">
+                ジャケット写真：
+                <input type="file" name="filefield">
+                </table>
+                <table class="table">
+                    <div id="plus_f"></div>
+                    <div><input type="button" value="Add Song" onclick="plus()"> </div> 
+                </table>
+                              
+                <button class="btn btn-primary" type="submit">作成</button>
+                
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
+

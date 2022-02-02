@@ -1,0 +1,127 @@
+
+
+{% extends 'base.html' %}
+{% load static %}
+
+{% block header %}
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>Resume - Start Bootstrap Theme</title>
+    <link rel="icon" type="image/x-icon" href="{% static 'static-u/assets/img/favicon.ico' %}" />
+    <!-- Font Awesome icons (free version)-->
+    <script src="https://use.fontawesome.com/releases/v5.15.4/js/all.js" crossorigin="anonymous"></script>
+    <!-- Google fonts-->
+    <link href="https://fonts.googleapis.com/css?family=Saira+Extra+Condensed:500,700" rel="stylesheet" type="text/css" />
+    <link href="https://fonts.googleapis.com/css?family=Muli:400,400i,800,800i" rel="stylesheet" type="text/css" />
+    <!-- Core theme CSS (includes Bootstrap)-->
+    <link href="{% static 'static-u/css/styles.css' %}" rel="stylesheet" />
+</head>
+{% endblock %}
+
+{% block contents %}
+<script type="text/javascript">
+    var counter = 1;
+    function plus() {
+        // プラス処理後、空欄のまま送信するとエラーを吐く
+        var clone_form = document.getElementById("forms");
+        var clone_e = clone_form.cloneNode(true);
+        document.getElementById('plus_f').appendChild(clone_e);
+
+        var name_counter_ob = document.getElementById('music' + String(counter));
+        var name_dcounter_ob = document.getElementById('delnum_' + String(counter));
+
+        document.getElementById('extra_counter');
+        extra_counter.value = counter;
+
+        counter = counter + 1;
+        name_counter_ob.id = "music" + String(counter);
+        name_counter_ob.name = "music" + String(counter);
+        // 削除する要素指定用のタグのインクリメント
+        name_dcounter_ob.id = "delnum_" + String(counter);
+        name_dcounter_ob.name = "delnum_" + String(counter);
+    };
+
+    function del(e){
+        e.parentNode.remove();
+    };
+var flg = false;
+    function truedel(e){
+        var h2elem = e.previousElementSibling;
+        h2elem.style.opacity = 0.2;
+
+        var t_elemId = e.nextElementSibling.nextElementSibling;
+        var forloop = t_elemId.name;
+
+        var del_e = t_elemId.nextElementSibling;
+        del_e.name = 'delnum' + String(forloop);        //delnum + 削除したい{{forloop.counter}}の値になる
+        e.style.display= 'none';
+        e.nextElementSibling.style.display = '';
+    };
+
+    function falsedel(e){
+        var h2elem = e.previousElementSibling.previousElementSibling;
+        h2elem.style.opacity = 1.0;
+
+        var t_elemId = e.nextElementSibling;
+        var forloop = t_elemId.name;
+
+        var del_e = t_elemId.nextElementSibling;
+        del_e.name = 'defalt';
+        e.style.display= 'none';
+        e.previousElementSibling.style.display='';
+    };
+</script>
+<div class="container">
+    <div class="my-div-style w-100">
+        <div class="row">
+            <div class="col-3">
+                <strong>プレイリスト名：{{ group_name }}</strong>
+                <hr>
+            </div>
+            <form method="POST" enctype='multipart/form-data'>
+              {% for group in grouped_l %}
+                    <div class="post-preview">
+                        <h2 class="post-title">
+                            {{ group.upload_music.title }}
+                        </h2>
+                        <input id="delnum_1" type="button" value="楽曲削除" onclick="truedel(this)"></button>
+                        <input id="delnum_1" style="display: none;" type="button" value="削除解除" onclick="falsedel(this)"></button>
+                        <input style="display: none;" type="text" value="{{group.pk}}" name="{{ forloop.counter }}">
+                        優先再生時の優先度
+                        <input style="display: none;" type="text" value="{{group.upload_music.title}}" name="defalt">　   <!--削除ボタン時にname = delnum{{forlooop.counter}}追加-->
+                        <input type ="range" value={{group.priority}} min="1" max="100" name="{{group.pk}}">
+                        {{group.priority}}
+                    </div>
+                    {% empty %}
+                    <p>音楽がありません</p>
+            {% endfor %}
+
+            <div style="display: none;">
+                <div id="forms">
+                    <table class="table">
+                        <input id="music1" type="text" autocomplete="on" list="select_bank2" name="music1" value="{{ value }}">
+                        <datalist id="select_bank2">
+                            {% for item in play_m_l %}
+                            <option value="{{ item }}">
+                            {% endfor %}
+                        </datalist>
+                        <input id="delnum_1" type="button" value="削除" onclick="del(this)"></button>
+                    </table>
+                </div>
+            </div>
+
+            <input id="extra_counter" style="display: none;" type="number" value=0 name="ex_counter">
+            {% csrf_token %}
+            <div id="plus_f"></div>
+            <input type="button" value="plus" onclick="plus()">                
+
+            <button class="btn btn-primary" type="submit">変更</button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,571 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}マイページ{% endblock %}
+
+{% block active_diary_list %}active{% endblock %}
+
+{% block contents %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link href="{% static 'css/styles_mypage.css' %}" rel="stylesheet" />
+    <!-- CSS here -->
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+
+<body id="page-top">
+    <!-- Navigation-->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary" id="sideNav">
+        <a class="navbar-brand js-scroll-trigger" href="#page-top">
+            <span class="d-block d-lg-none">
+                {{ user }}
+            </span>
+            <span class="d-none d-lg-block">
+                {% if m.music_photo %}
+                <img class="img-fluid img-profile rounded-circle mx-auto mb-2"
+                    src="{% static 'assets/img/team/profile.jpg' %}" alt="..." />
+                {% else %}
+                <img class="img-fluid img-profile rounded-circle mx-auto mb-2" src="{% static 'images/no_image3.jpg' %}"
+                    alt="" style="height:250px">
+                {% endif %}
+            </span>
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive"
+            aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link js-scroll-trigger" href="#about">
+                        CHANGE INFO
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link js-scroll-trigger" href="#experience">
+                        UPLOAD
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link js-scroll-trigger" href="#education">
+                        DOWNLOAD
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link js-scroll-trigger" href="#skills">
+                        FOLLOWING
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link js-scroll-trigger" href="#interests">
+                        MY PLAYLIST
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <!-- Page Content-->
+    <div class="container-fluid p-0">
+        <!-- About-->
+        <section class="resume-section" id="about">
+            <div class="resume-section-content">
+                <h1 class="mb-0">
+                    {{ user }}
+                </h1>
+                <div class="subheading mb-5">
+                    ユーザーコード: {{ user.pk }}
+                </div>
+                <p class="lead mb-5">
+                    最終更新日時：{{ update_at }}
+                </p>
+                <h3>
+                    ＜自己紹介＞
+                </h3>
+                <div class="navigation-area">
+                    <div class="row">
+                        <div
+                            class="col-lg-6 col-md-6 col-12 nav-left flex-row d-flex justify-content-start align-items-center">
+                            <div class="thumb">
+                                <a href="#">
+                                    <img class="img-fluid" src="{% static 'img/post/11.png' %}" alt="">
+                                </a>
+                            </div>
+                            <div class="arrow">
+                                <a href="#">
+                                    <span class="lnr text-white ti-arrow-left"></span>
+                                </a>
+                            </div>
+                            <div class="detials">
+                                <p>
+                                    Musical Instrument
+                                </p>
+                                <a href="#">
+                                    <h4>
+                                        Guitar
+                                    </h4>
+                                </a>
+                            </div>
+                        </div>
+                        <div
+                            class="col-lg-6 col-md-6 col-12 nav-left flex-row d-flex justify-content-start align-items-center">
+                            <div class="thumb">
+                                <a href="#">
+                                    <img class="img-fluid" src="{% static 'img/post/22.png' %}" alt="">
+                                </a>
+                            </div>
+                            <div class="arrow">
+                                <a href="#">
+                                    <span class="lnr text-white ti-arrow-left"></span>
+                                </a>
+                            </div>
+                            <div class="detials">
+                                <p>
+                                    Musical Genre
+                                </p>
+                                <a href="#">
+                                    <h4>
+                                        Jpop
+                                    </h4>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="show_info d-flex flex-row align-items-start justify-content-start">
+                    </div>
+                    <div class="quote-wrapper">
+                        <div class="quotes">
+                            MCSE boot camps have its supporters and its detractors. Some people do not understand why
+                            you
+                            should have to spend money on boot camp when you can get the MCSE study materials yourself
+                            at
+                            a fraction of the camp price. However, who has the willpower to actually sit through a
+                            self-imposed MCSE training.
+                        </div>
+                    </div>
+
+                    <!-- 追加 -->
+                    <a class="btn btn-success mt-5 mb-3" href="{% url 'kadai_app:user_update' userloginfo.pk %}">編集</a>
+                    
+                </div>
+            </div>
+        </section>
+
+        <hr class="m-0">
+
+        <!-- 投稿した曲 -->
+        <section class="resume-section" id="experience">
+            <div class="resume-section-content">
+                <h2 class="mb-5">
+                    投稿した曲
+                </h2>
+                <div class="row">
+                    <div class="col text-center">
+                        <div class="button_fill shows_button">
+                            <a href="{% url 'kadai_app:play_create'%}">
+                                Upload
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="row shows_2_row">
+                    {% for m in music %}
+                    <div class="col-xl-3 col-md-6">
+                        <div class="show">
+                            <div class="show_image">
+                                <a href="{% url 'kadai_app:play_detail' m.pk %}">
+                                    {% if m.music_photo %}
+                                    <img src="{{ m.music_photo.url}}" alt="" style="height:250px">
+                                    {% else %}
+                                    <img src="{% static 'images/no_image3.jpg' %}" alt="" style="height:250px">
+                                    {% endif %}
+                                    <div class="show_play_icon">
+                                        <img src="{% static 'images/play.svg' %}"
+                                            alt="https://www.flaticon.com/authors/cole-bemis">
+                                    </div>
+                                    <div class="show_content">
+                                        <div class="show_title">
+                                            {{ m.title }}
+                                        </div>
+                                    </div>
+                                </a>
+                                <div class="show_tags">
+                                    <div class="tags">
+                                        <ul class="d-flex flex-row align-items-start justify-content-start">
+                                            <li>
+                                                <a href="#">
+                                                    {{ m.tag }}
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% empty %}
+                    <p>
+                        音楽がありません。
+                    </p>
+                    {% endfor %}
+                </div>
+
+                <!--ページネーション処理-->
+                {% if is_paginated %}
+                <ul class="pagination">
+                    <!--前ページへのリンク-->
+                    {% if page_obj.has_previous %}
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ page_obj.previous_page_number }}">
+                            <span aria-hidden="true">&laquo;</span>
+                        </a>
+                    </li>
+                    {% endif %}
+
+                    <!--ページ数表示-->
+                    {% for page_num in page_obj.paginator.page_range %}
+                    {% if page_obj.number == page_num %}
+                    <li class="page-item active">
+                        <a class="page-link" href="#">
+                            {{ page_num }}
+                        </a>
+                    </li>
+                    {% else %}
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ page_num }}">
+                            {{ page_num }}
+                        </a>
+                    </li>
+                    {% endif %}
+                    {% endfor %}
+
+                    <!--次ページへのリンク-->
+                    {% if page_obj.has_next %}
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ page_obj.next_page_number }}">
+                            <span aria-hidden="true">&raquo;</span>
+                        </a>
+                    </li>
+                    {% endif %}
+                </ul>
+                {% endif %}
+        </section>
+
+        <hr class="m-0">
+
+        <!-- Education-->
+        <section class="resume-section" id="education">
+            <div class="resume-section-content">
+                <h2 class="mb-5">
+                    ダウンロードした曲
+                </h2>
+                <div class="row">
+                    <div class="col">
+                        <div class="season_links">
+                            <ul class="d-flex flex-row align-items-start justify-content-center flex-wrap">
+                                <div class="col-xl-3 col-md-3">
+                                    <div class="music_btn">
+                                        <a href="#" class="boxed-btn">Random Play</a>
+                                    </div>
+                                </div>
+                                <div class="col-xl-3 col-md-3">
+                                    <div class="music_btn">
+                                        <a href="#" class="boxed-btn">Priority Play</a>
+                                    </div>
+                                </div>
+                                <div class="col-xl-3 col-md-3">
+                                    <div class="music_btn">
+                                        <a href="#" class="boxed-btn">Normal Play</a>
+                                    </div>
+                                </div>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- music_area  -->
+                <div class="music_area music_gallery inc_padding">
+
+                    <div class="container">
+
+                        <div class="row align-items-center justify-content-center mb-20">
+                            <div class="col-xl-10">
+                                <div class="row align-items-center">
+                                    <div class="col-xl-9 col-md-9">
+                                        <div class="music_field">
+                                            <div class="thumb">
+                                                <img src="{% static 'img/music_man/1.png' %}" alt="">
+                                            </div>
+                                            <div class="audio_name">
+                                                <div class="song_title"><a href="{% url 'kadai_app:play'%}">Song's
+                                                        Name</a></div>
+                                                <div class="name">
+                                                    <p href="{% url 'kadai_app:play'%}">Author's Name</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+                        <div class="row align-items-center justify-content-center mb-20">
+                            <div class="col-xl-10">
+                                <div class="row align-items-center">
+                                    <div class="col-xl-9 col-md-9">
+                                        <div class="music_field">
+                                            <div class="thumb">
+                                                <img src="{% static 'img/music_man/2.png' %}" alt="">
+                                            </div>
+                                            <div class="audio_name">
+                                                <div class="song_title"><a href="{% url 'kadai_app:play'%}">Song's
+                                                        Name</a></div>
+                                                <div class="name">
+                                                    <p>Author's Name</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row align-items-center justify-content-center mb-20">
+                            <div class="col-xl-10">
+                                <div class="row align-items-center">
+                                    <div class="col-xl-9 col-md-9">
+                                        <div class="music_field">
+                                            <div class="thumb">
+                                                <img src="{% static 'img/music_man/3.png' %}" alt="">
+                                            </div>
+                                            <div class="audio_name">
+                                                <div class="song_title"><a href="{% url 'kadai_app:play'%}">Song's
+                                                        Name</a></div>
+                                                <div class="name">
+                                                    <p>Author's Name</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row align-items-center justify-content-center mb-20">
+                            <div class="col-xl-10">
+                                <div class="row align-items-center">
+                                    <div class="col-xl-9 col-md-9">
+                                        <div class="music_field">
+                                            <div class="thumb">
+                                                <img src="{% static 'img/music_man/4.png' %}" alt="">
+                                            </div>
+                                            <div class="audio_name">
+                                                <div class="audio_name">
+                                                    <div class="song_title"><a href="{% url 'kadai_app:play'%}">Song's
+                                                            Name</a></div>
+                                                    <div class="name">
+                                                        <p>Author's Name</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+        </section>
+        <hr class="m-0">
+
+        <!-- お気に入りユーザー -->
+        <section class="resume-section" id="skills">
+            <div class="resume-section-content">
+                <h2 class="mb-5">
+                    お気に入りユーザー
+                </h2>
+                <div class="row">
+                    <div class="col-lg-3">
+                        {% for f in following %}
+                        <div class="team-member">
+                            <a href="{% url 'kadai_app:userpage' f.followuser.pk %}">
+                                {% if m.music_photo %}
+                                <img class="mx-auto rounded-circle" src="{% static 'assets/img/team/1.jpg' %}">
+                                {% else %}
+                                <img class="mx-auto rounded-circle" src="{% static 'images/no_image3.jpg' %}">
+                                {% endif %}
+                                </div>
+                                <div class="show_title">
+                                    {{ f.followuser }}
+                                </div>
+                            </a>
+                        </div>
+                        {% empty %}
+                        <p>
+                            お気に入りユーザーはいません。
+                        </p>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <hr class="m-0">
+
+        <!-- マイプレイリスト -->
+        <section class="resume-section" id="interests">
+            <div class="resume-section-content">
+                <h2 class="mb-5">
+                    マイプレイリスト
+                </h2>
+                <div class="row">
+                    <div class="col text-center">
+                        <div class="button_fill shows_button">
+                            <a href="{% url 'kadai_app:group_create' %}">
+                                Create Playlist
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="shows">
+                    <div class="container">
+                        <div class="row shows_row">
+                            {% for g in group %}
+                            <!-- Show -->
+                            <div class="col-lg-4">
+                                <div class="show">
+                                    <div class="show_image">
+                                        <a href="{% url 'kadai_app:group_detail' g.title %}">
+                                            {% if g.music_photo %}
+                                            <img src="{{ g.music_photo.url}}" alt="" style="height:320px">
+                                            {% else %}
+                                            <img src="{% static 'images/no_image3.jpg' %}" alt="" style="height:320px">
+                                            {% endif %}
+                                            <div class="show_play_icon">
+                                                <img src="{% static 'images/play.svg' %}" alt="">
+                                            </div>
+                                        </a>
+                                        <div class="show_tags">
+                                            <div class="tags">
+                                                <ul class="d-flex flex-row align-items-start justify-content-start">
+                                                    <li>
+                                                        <a href="#">
+                                                            {{ g.tag }}
+                                                        </a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="show_content">
+                                        <div class="show_title">
+                                            <a href="{% url 'kadai_app:group_detail' g.title %}">
+                                                {{ g.title }}
+                                            </a>
+                                        </div>
+                                        <div class="show_info d-flex flex-row align-items-start justify-content-start">
+                                        </div>
+                                        <div class="show_date">
+                                            {{ g.created_at }}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            {% empty %}
+                            <p>
+                                プレイリストはありません。
+                            </p>
+                            {% endfor %}
+                        </div>
+                        <!--ページネーション処理-->
+                        {% if is_paginated %}
+                        <ul class="pagination">
+                            <!--前ページへのリンク-->
+                            {% if page_obj.has_previous %}
+                            <li class="page-item">
+                                <a class="page-link" href="?page={{ page_obj.previous_page_number }}">
+                                    <span aria-hidden="true">&laquo;</span>
+                                </a>
+                            </li>
+                            {% endif %}
+                            <!--ページ数表示-->
+                            {% for page_num in page_obj.paginator.page_range %}
+                            {% if page_obj.number == page_num %}
+                            <li class="page-item active">
+                                <a class="page-link" href="#">
+                                    {{ page_num }}
+                                </a>
+                            </li>
+                            {% else %}
+                            <li class="page-item">
+                                <a class="page-link" href="?page={{ page_num }}">
+                                    {{ page_num }}
+                                </a>
+                            </li>
+                            {% endif %}
+                            {% endfor %}
+                            <!--次ページへのリンク-->
+                            {% if page_obj.has_next %}
+                            <li class="page-item">
+                                <a class="page-link" href="?page={{ page_obj.next_page_number }}">
+                                    <span aria-hidden="true">&raquo;</span>
+                                </a>
+                            </li>
+                            {% endif %}
+                        </ul>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!--end-->
+    </div>
+
+    <!-- Bootstrap core JS-->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Core theme JS-->
+    <script src="{% static 'js/scripts_mypage.js' %}"></script>
+
+    <!-- JS here -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
+        </script>
+    <script src="{% static 'js/vendor/modernizr-3.5.0.min.js' %}"></script>
+    <script src="{% static 'js/vendor/jquery-1.12.4.min.js' %}"></script>
+    <script src="{% static 'js/popper.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'js/owl.carousel.min.js' %}"></script>
+    <script src="{% static 'js/isotope.pkgd.min.js' %}"></script>
+    <script src="{% static 'js/ajax-form.js' %}"></script>
+    <script src="{% static 'js/waypoints.min.js' %}"></script>
+    <script src="{% static 'js/jquery.counterup.min.js' %}"></script>
+    <script src="{% static 'js/imagesloaded.pkgd.min.js' %}"></script>
+    <script src="{% static 'js/audioplayer.js' %}"></script>
+    <script src="{% static 'js/scrollIt.js' %}"></script>
+    <script src="{% static 'js/jquery.scrollUp.min.js' %}"></script>
+    <script src="{% static 'js/wow.min.js' %}"></script>
+    <script src="{% static 'js/nice-select.min.js' %}"></script>
+    <script src="{% static 'js/jquery.slicknav.min.js' %}"></script>
+    <script src="{% static 'js/jquery.magnific-popup.min.js' %}"></script>
+    <script src="{% static 'js/plugins.js' %}"></script>
+    <script src="{% static 'js/gijgo.min.js' %}"></script>
+    <script src="{% static 'js/slick.min.js' %}"></script>
+    <!--contact js-->
+    <script src="{% static 'js/main.js' %}"></script>
+    <script>
+        $(function () {
+            $('audio').audioPlayer({
+
+            });
+        });
+    </script>
+    <!-- end -->
+
+</body>
+
+</html>
+{% endblock %}

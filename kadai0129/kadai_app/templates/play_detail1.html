@@ -1,0 +1,180 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block header %}
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>Resume - Start Bootstrap Theme</title>
+    <link rel="icon" type="image/x-icon" href="{% static 'static-u/assets/img/favicon.ico' %}" />
+    <!-- Font Awesome icons (free version)-->
+    <script src="https://use.fontawesome.com/releases/v5.15.4/js/all.js" crossorigin="anonymous"></script>
+    <!-- Google fonts-->
+    <link href="https://fonts.googleapis.com/css?family=Saira+Extra+Condensed:500,700" rel="stylesheet" type="text/css" />
+    <link href="https://fonts.googleapis.com/css?family=Muli:400,400i,800,800i" rel="stylesheet" type="text/css" />
+    <!-- Core theme CSS (includes Bootstrap)-->
+    <link href="{% static 'static-u/css/styles.css' %}" rel="stylesheet" />
+</head>
+{% endblock %}
+
+{% block contents %}
+
+<div class="container">
+    <div class="my-div-style w-100">
+        <div class="row">
+            <div class="col-3">
+                <strong>タイトル</strong>
+            </div>
+            <div class="col-9">
+                {{ play.title }}
+            </div>
+        </div>
+        <div>
+            <div class="col-3">
+                {{ iine_num }}
+                <strong> 人の人がいいね</strong>
+            </div>
+        </div>
+
+        <hr>
+
+        <div class="row" style="display: none;">
+
+            <div id="a" title="{{ play.attach1.url }}"></div>
+            
+
+            <audio id='audio'></audio>
+            <style>
+                 #row {
+                  display: none;
+                  text-align: left;
+                }
+            </style>
+
+            <script type="text/javascript">                
+                document.getElementById('a').style.display="none";
+                // document.getElementById('b').style.display="none";
+                // document.getElementById('c').style.display="none";
+                
+                var pla = a.title;
+                // var plb = b.title;
+                // var plc = c.title;
+                
+                var playlist = [];
+                playlist.push(pla);
+                document.write(playlist)
+                var audio = document.createElement('audio');
+                document.body.appendChild(audio);
+                audio.style.width = '100%';
+                audio.classList.add('sticky-bottom');
+                audio.controls = true;
+                audio.volume = 0.1;
+
+                audio.src = playlist[0];
+                audio.play();
+
+                var index = 0;
+                audio.addEventListener('ended', function(){
+                    index++;
+                    if (index < playlist.length) {
+                        audio.src = playlist[index];
+                        audio.play();
+                    }
+                    else {
+                        audio.src = playlist[0];
+                        audio.play();
+                        index = 0;
+                    }
+                    });
+            </script>
+
+
+        </div>
+
+        <div class="row">
+            <div class="col-3">
+                <strong>投稿者</strong>
+            </div>
+            <div class="col-9">
+                {{ play.user }}
+            </div>
+            <div class="col-3">
+                <strong>作成日時</strong>
+            </div>
+            <div class="col-9">
+                {{ play.created_at }}
+            </div>
+        </div>
+
+        <hr>
+
+        <div class="row">
+            <div class="col-3">
+                <strong>更新日時</strong>
+            </div>
+            <div class="col-9">
+                {{ play.update_at }}
+            </div>
+        </div>
+        <!-- ログインユーザーが投稿者と一致しているかどうか -->
+        {% if user == play.user %}
+        <a class="btn btn-success mt-5 mb-3" href="{% url 'kadai_app:play_update' object.pk %}">編集</a>
+        <a class="btn btn-danger mt-5 ml-2 mb-3" href="{% url 'kadai_app:play_delete' object.pk %}">削除</a>
+        {% endif %}
+    </div>
+</div>
+
+<div class="comment">
+  {% if user.is_authenticated %}
+    <form action="{% url 'kadai_app:likes_form' play.pk %}" method="post">
+      {% csrf_token %}
+        <div>
+          <button type="submit">良いね</button>
+        </div>
+      </form>
+   {% endif %}
+  <h3>コメント</h3>
+  {% for comment in play.comment_set.all %}
+  <div class="comment-text">
+    <p>{{ comment.text }}</p>
+  </div>
+  {% endfor %}
+</div>
+<div class="comment-form">
+  {% if user.is_authenticated %}
+    <h4>コメント投稿</h4>
+    <!-- コメント作成用のURLを渡す -->
+    <!-- javascriptでページにリロードをかけず投稿できそうかも -->
+    <form action="{% url 'kadai_app:comment_create' play.pk %}" method="post">
+      {% csrf_token %}
+      {{ comment_form }}
+      <div>
+        <button type="submit">送信</button>
+      </div>
+    </form>
+    {% endif %}
+</div>
+
+
+<style media="screen">
+  .title {
+    font-size: 2rem;
+  }
+
+  .text {
+    margin-top: 30px;
+  }
+
+  .comment {
+    margin-top: 30px;
+  }
+
+  .comment-text {
+    margin-top: 20px;
+  }
+
+</style>
+{% endblock %}

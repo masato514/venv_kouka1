@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}{% endblock %}
+
+{% block active_diary_list %}active{% endblock %}
+
+{% block contents %}
+<div class="container">
+    <div class="row">
+        <div class="my-div-style w-100">
+            
+            <form method="POST" enctype='multipart/form-data'>
+                {% csrf_token %}
+                <table class="table">
+                    {{ form.as_table }}
+                </table>
+                <p id="test"></p>
+                <button class="btn btn-primary" type="submit">作成</button>
+            </form>
+            <!-- <input id="button1" type="button" value="plus" onclick="plus()"> -->
+            <!-- <script type="text/javascript">
+                function plus(){
+                    var hrNode = document.createElement('hr');
+                    test.appendChild(hrNode);
+                    var inputNode = document.createElement('input');
+                    inputNode.type= "text";
+                    // inputNode.autocomplete = "on";
+                    // inputNode.list= "select_name";
+                    // inputNode.value= "{{ value }}";
+                    test.appendChild(inputNode);
+                }
+                var test = document.getElementById('test');
+                var inputNode = document.createElement('input');
+                inputNode.type= "text";
+                test.appendChild(inputNode);                
+            </script> -->
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+<!-- ・html内部でjavascriptを使い、formを任意で増やせるようにする
+・増やした数をjavascriptに
+・javascriptでstring(x)で(name=str型の数字)で認識できるようにする（html書き換え）
+
+・html内部では(name= '数字' )と記述（javascriptでインクリメントする）
+・増やした回数をviewに渡す（材料種類に当たる）、
+・viewにhtmlの中身をリストで渡す（name = 'namea_z'のzを数字で判断）
+・viewで -->

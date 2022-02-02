@@ -1,0 +1,346 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block contents%}
+<!-- ログインしていないときに使う -->
+<header class="bg-primary text-white text-center">
+    <!-- Home -->
+    <div class="home">
+        <div class="background_image" style="background-image:url(images/index.jpg)">
+        <div class="home_container">
+            <div class="container">
+                <div class="row">
+                    <div class="col">
+                        <div class="home_content">
+                            <div class="tags">
+                                <ul class="d-flex flex-row align-items-start justify-content-start">
+                                    <li><a href="{% url 'account_login' %}">Log in</a></li>
+                                    <li><a href="{% url 'kadai_app:inquiry' %}">contact</a></li>
+                                    <li><a href="{% url 'kadai_app:intro' %}">intro</a></li>
+                                </ul>
+                            </div>
+                            <div class="home_title">
+                                <h1>あなたにぴったりなおすすめ曲</h1>
+                            </div>
+                            <div class="home_subtitle">Welcome to Team A's Website. Let make your music!
+                            </div>
+                            <div class="track_info">
+                                <ul class="d-flex flex-row align-items-start justify-content-start">
+                                    <li><a href="{% url 'kadai_app:mypage' %}">Enjoy the Music</a></li>
+                                    <li><a href="{% url 'kadai_app:mypage' %}">Make your own Song</a></li>
+                                    <li><a href="{% url 'kadai_app:mypage' %}">Create your Playlist</a></li>
+                                    <!-- <li><a href="#"></a></li> -->
+                                </ul>
+                            </div>
+                            <div class="track track_home">
+                                <iframe width="100%" height="166" scrolling="no" frameborder="no" allow="autoplay"
+                                    src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/197004056&color=%23ff5500&auto_play=false&hide_related=true&show_comments=false&show_user=false&show_reposts=false&show_teaser=false"></iframe>
+                            </div>
+                            <div class="button_border home_button trans_200"><a href="#">More Info</a></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+    </div>
+</header>
+
+<!-- Portfolio Section-->
+<section class="page-section portfolio" id="portfolio">
+    <div class="container">
+        <!-- Portfolio Section Heading-->
+        <h2 class="page-section-heading text-center text-uppercase text-secondary mb-0">Ranking</h2>
+        <!-- Icon Divider-->
+        <div class="divider-custom">
+            <div class="divider-custom-line"></div>
+            <div class="single-element-widget mt-30">
+                <div class="default-select" id="default-select">
+                    <select>
+                        <option value=" 1">再生数が多い</option>
+                        <option value="1">いいねが多い</option>
+                        <option value="1">ブラックリスト</option>
+                    </select>
+                </div>
+            </div>
+            <!-- <div class="divider-custom-icon"><i class="fas fa-star"></i></div> -->
+            <div class="divider-custom-line"></div>
+        </div>
+        
+    <!-- Portfolio Grid Items-->
+    <div class="row justify-content-center">
+
+    <!-- Ranking Section-->
+    <div class="col-lg-4">   
+        <!-- <div class="footer_title">Latest Episodes</div> -->
+            <!-- <div class="latest_container">   -->
+
+            <div class="latest_container" style="background: #e7f1f8; box-shadow: rgba(0, 0, 0, 0.1) 3px 4px 4px; clear: both; line-height: 1.7; color: white; font-family: Roboto; letter-spacing: -0.75px; margin: 5px 0px; padding: 20px 25px; transition: 0.5s;">
+
+            <!-- Latest -->
+            <div class="latest">
+                <div class="latest_title_container d-flex flex-row align-items-start justify-content-start">
+                    <a href="{% url 'kadai_app:play'%}">
+                        <div class="d-flex flex-row align-items-start justify-content-start">
+                            <div class="latest_play">
+                                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Capa_1" x="0px" y="0px" width="512px" height="512px" viewBox="0 0 714 714" style="enable-background:new 0 0 714 714;" xml:space="preserve">
+                                    <g id="Play">
+                                        <path d="M641.045,318.521L102,0C73.822,0,51,22.822,51,51v612c0,28.178,22.822,51,51,51l539.045-318.521      C654.661,387.422,663,372.81,663,357C663,341.19,654.661,326.579,641.045,318.521z M153,565.386V148.614L505.665,357      L153,565.386z" fill="#FFFFFF"/>
+                                    </g>
+                                </svg>
+                            </div>
+                            <div class="latest_title_content">
+                                <div class="latest_title">Into Arm</div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="latest_episode_info">
+                    <ul class="d-flex flex-row align-items-start justify-content-start">
+                        <li><a href="{% url 'kadai_app:userpage'%}">Ava Max</a></li>
+                            <li><a href="#">Music</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Latest -->
+            <div class="latest">
+                <div class="latest_title_container d-flex flex-row align-items-start justify-content-start">
+                    <a href="{% url 'kadai_app:play'%}">
+                        <div class="d-flex flex-row align-items-start justify-content-start">
+                            <div class="latest_play">
+                                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Capa_1" x="0px" y="0px" width="512px" height="512px" viewBox="0 0 714 714" style="enable-background:new 0 0 714 714;" xml:space="preserve">
+                                    <g id="Play">
+                                        <path d="M641.045,318.521L102,0C73.822,0,51,22.822,51,51v612c0,28.178,22.822,51,51,51l539.045-318.521      C654.661,387.422,663,372.81,663,357C663,341.19,654.661,326.579,641.045,318.521z M153,565.386V148.614L505.665,357      L153,565.386z" fill="#FFFFFF"/>
+                                    </g>
+                                </svg>
+                            </div>
+                            <div class="latest_title_content">
+                                <div class="latest_title">A Step Further</div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="latest_episode_info">
+                    <ul class="d-flex flex-row align-items-start justify-content-start">
+                        <li><a href="{% url 'kadai_app:userpage'%}">September</a></li>
+                            <li><a href="#">Music</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Latest -->
+            <div class="latest">
+                <div class="latest_title_container d-flex flex-row align-items-start justify-content-start">
+                    <a href="{% url 'kadai_app:play'%}">
+                        <div class="d-flex flex-row align-items-start justify-content-start">
+                            <div class="latest_play">
+                                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Capa_1" x="0px" y="0px" width="512px" height="512px" viewBox="0 0 714 714" style="enable-background:new 0 0 714 714;" xml:space="preserve">
+                                    <g id="Play">
+                                        <path d="M641.045,318.521L102,0C73.822,0,51,22.822,51,51v612c0,28.178,22.822,51,51,51l539.045-318.521      C654.661,387.422,663,372.81,663,357C663,341.19,654.661,326.579,641.045,318.521z M153,565.386V148.614L505.665,357      L153,565.386z" fill="#FFFFFF"/>
+                                    </g>
+                                </svg>
+                            </div>
+                            <div class="latest_title_content">
+                                <div class="latest_title">Stay</div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="latest_episode_info">
+                    <ul class="d-flex flex-row align-items-start justify-content-start">
+                        <li><a href="{% url 'kadai_app:userpage'%}">Justin Bieber</a></li>
+                            <li><a href="#">Music</a></li>
+                    </ul>
+                </div>
+            </div>
+            <!-- Latest -->
+            <div class="latest">
+                <div class="latest_title_container d-flex flex-row align-items-start justify-content-start">
+                    <a href="{% url 'kadai_app:play'%}">
+                        <div class="d-flex flex-row align-items-start justify-content-start">
+                            <div class="latest_play">
+                                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Capa_1" x="0px" y="0px" width="512px" height="512px" viewBox="0 0 714 714" style="enable-background:new 0 0 714 714;" xml:space="preserve">
+                                    <g id="Play">
+                                        <path d="M641.045,318.521L102,0C73.822,0,51,22.822,51,51v612c0,28.178,22.822,51,51,51l539.045-318.521      C654.661,387.422,663,372.81,663,357C663,341.19,654.661,326.579,641.045,318.521z M153,565.386V148.614L505.665,357      L153,565.386z" fill="#FFFFFF"/>
+                                    </g>
+                                </svg>
+                            </div>
+                            <div class="latest_title_content">
+                                <div class="latest_title">Go Big Or Go Home</div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="latest_episode_info">
+                    <ul class="d-flex flex-row align-items-start justify-content-start">
+                        <li><a href="{% url 'kadai_app:userpage'%}">Enhypen</a></li>
+                            <li><a href="#">Music</a></li>
+                    </ul>
+                </div>
+            </div>
+            <!-- Latest -->
+            <div class="latest">
+                <div class="latest_title_container d-flex flex-row align-items-start justify-content-start">
+                    <a href="{% url 'kadai_app:play'%}">
+                        <div class="d-flex flex-row align-items-start justify-content-start">
+                            <div class="latest_play">
+                                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Capa_1" x="0px" y="0px" width="512px" height="512px" viewBox="0 0 714 714" style="enable-background:new 0 0 714 714;" xml:space="preserve">
+                                    <g id="Play">
+                                        <path d="M641.045,318.521L102,0C73.822,0,51,22.822,51,51v612c0,28.178,22.822,51,51,51l539.045-318.521      C654.661,387.422,663,372.81,663,357C663,341.19,654.661,326.579,641.045,318.521z M153,565.386V148.614L505.665,357      L153,565.386z" fill="#FFFFFF"/>
+                                    </g>
+                                </svg>
+                            </div>
+                            <div class="latest_title_content">
+                                <div class="latest_title">Talking To The Moon</div>
+                            </div>
+                        </div>
+                    </a>-
+                </div>
+                <div class="latest_episode_info">
+                    <ul class="d-flex flex-row align-items-start justify-content-start">
+                        <li><a href="{% url 'kadai_app:userpage'%}">Bunor Mars</a></li>
+                            <li><a href="#">Music</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            </div>
+
+    </div>
+
+    </div>
+         
+    </div>
+    </div>
+</section>
+
+
+<!-- Recommend Section-->
+    <section class="page-section portfolio" id="portfolio">
+        <div class="container">
+            <!-- Portfolio Section Heading-->
+            <h2 class="page-section-heading text-center text-uppercase text-secondary mb-0">Recommend</h2>
+            <!-- Icon Divider-->
+            <div class="divider-custom">
+                <div class="divider-custom-line"></div>
+                <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
+                <div class="divider-custom-line"></div>
+            </div>
+            <!-- Portfolio Grid Items-->
+            <div class="row justify-content-center">
+                <!-- Portfolio Item 1-->
+                <div class="col-md-6 col-lg-4 mb-5">
+                    <div class="portfolio-item mx-auto" data-bs-toggle="modal" data-bs-target="#portfolioModal1">
+                        <div class="portfolio-item-caption d-flex align-items-center justify-content-center h-100 w-100">
+                            <!-- <div class="portfolio-item-caption-content text-center text-white"><i class="fas fa-plus fa-3x"></i></div> -->
+                        </div>
+                        <img class="img-fluid" src="{% static 'assets/img/portfolio/p1.jpg' %}" alt="..." />
+                        <div class="show_tags">
+							<div class="tags">
+								<ul class="d-flex flex-row align-items-start justify-content-start">
+									<li><a href="#">Most Liked</a></li>
+								</ul>
+							</div>
+						</div>
+                        <div class="show_title"><a href="{% url 'kadai_app:play'%}">Song's name</a></div>
+                        <div><a href="{% url 'kadai_app:userpage'%}">Author</a></div>
+                    </div>
+                </div>
+                    <!-- Portfolio Item 2-->
+                    <div class="col-md-6 col-lg-4 mb-5">
+                        <div class="portfolio-item mx-auto" data-bs-toggle="modal" data-bs-target="#portfolioModal2">
+                            <div class="portfolio-item-caption d-flex align-items-center justify-content-center h-100 w-100">
+                                <!-- <div class="portfolio-item-caption-content text-center text-white"><i class="fas fa-plus fa-3x"></i></div> -->
+                            </div>
+                            <img class="img-fluid" src="{% static 'assets/img/portfolio/p2.jpg' %}" alt="..." />
+                            <div class="show_tags">
+								<div class="tags">
+									<ul class="d-flex flex-row align-items-start justify-content-start">
+										<li><a href="#">Best</a></li>
+									</ul>
+								</div>
+							</div>
+                            <div class="show_title"><a href="{% url 'kadai_app:play'%}">Song's name</a></div>
+                            <div><a href="{% url 'kadai_app:userpage'%}">Author</a></div>
+                        </div>
+                    </div>
+                    <!-- Portfolio Item 3-->
+                    <div class="col-md-6 col-lg-4 mb-5">
+                        <div class="portfolio-item mx-auto" data-bs-toggle="modal" data-bs-target="#portfolioModal3">
+                            <div class="portfolio-item-caption d-flex align-items-center justify-content-center h-100 w-100">
+                                <!-- <div class="portfolio-item-caption-content text-center text-white"><i class="fas fa-plus fa-3x"></i></div> -->
+                            </div>
+                            <img class="img-fluid" src="{% static 'assets/img/portfolio/p3.jpg' %}" alt="..." />
+                            <div class="show_tags">
+								<div class="tags">
+									<ul class="d-flex flex-row align-items-start justify-content-start">
+										<li><a href="#">Recommend</a></li>
+									</ul>
+								</div>
+							</div>
+                            <div class="show_title"><a href="{% url 'kadai_app:play'%}">Song's name</a></div>
+                            <div><a href="{% url 'kadai_app:userpage'%}">Author</a></div>
+                        </div>
+                    </div>
+                    <!-- Portfolio Item 4-->
+                    <div class="col-md-6 col-lg-4 mb-5 mb-lg-0">
+                        <div class="portfolio-item mx-auto" data-bs-toggle="modal" data-bs-target="#portfolioModal4">
+                            <div class="portfolio-item-caption d-flex align-items-center justify-content-center h-100 w-100">
+                                <!-- <div class="portfolio-item-caption-content text-center text-white"><i class="fas fa-plus fa-3x"></i></div> -->
+                            </div>
+                            <img class="img-fluid" src="{% static 'assets/img/portfolio/p4.jpg' %}" alt="..." />
+                            <div class="show_tags">
+								<div class="tags">
+									<ul class="d-flex flex-row align-items-start justify-content-start">
+										<li><a href="#">Most Streamed</a></li>
+									</ul>
+								</div>
+							</div>
+                            <div class="show_title"><a href="{% url 'kadai_app:play'%}">Song's name</a></div>
+                            <div><a href="{% url 'kadai_app:userpage'%}">Author</a></div>
+                        </div>
+                    </div>
+                    <!-- Portfolio Item 5-->
+                    <div class="col-md-6 col-lg-4 mb-5 mb-md-0">
+                        <div class="portfolio-item mx-auto" data-bs-toggle="modal" data-bs-target="#portfolioModal5">
+                            <div class="portfolio-item-caption d-flex align-items-center justify-content-center h-100 w-100">
+                                <!-- <div class="portfolio-item-caption-content text-center text-white"><i class="fas fa-plus fa-3x"></i></div> -->
+                            </div>
+                            <img class="img-fluid" src="{% static 'assets/img/portfolio/safe.png' %}" alt="..." />
+                            <div class="show_tags">
+								<div class="tags">
+									<ul class="d-flex flex-row align-items-start justify-content-start">
+										<li><a href="#">Trend</a></li>
+									</ul>
+								</div>
+							</div>
+                            <div class="show_title"><a href="{% url 'kadai_app:play'%}">Song's name</a></div>
+                            <div><a href="{% url 'kadai_app:userpage'%}">Author</a></div>
+                        </div>
+                    </div>
+                    <!-- Portfolio Item 6-->
+                    <div class="col-md-6 col-lg-4">
+                        <div class="portfolio-item mx-auto" data-bs-toggle="modal" data-bs-target="#portfolioModal6">
+                            <div class="portfolio-item-caption d-flex align-items-center justify-content-center h-100 w-100">
+                                <!-- <div class="portfolio-item-caption-content text-center text-white"><i class="fas fa-plus fa-3x"></i></div> -->
+                            </div>
+                            <img class="img-fluid" src="{% static 'assets/img/portfolio/p6.jpg' %}" alt="..." />
+                            <div class="show_tags">
+								<div class="tags">
+									<ul class="d-flex flex-row align-items-start justify-content-start">
+										<li><a href="#">New</a></li>
+									</ul>
+								</div>
+							</div>
+                            <div class="show_title"><a href="{% url 'kadai_app:play'%}">Song's name</a></div>
+                            <div><a href="{% url 'kadai_app:userpage'%}">Author</a></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section-->
+             
+{% endblock %}

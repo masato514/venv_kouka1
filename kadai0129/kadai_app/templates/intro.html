@@ -1,0 +1,174 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}{% endblock %}
+
+{% block active_diary_list %}active{% endblock %}
+
+{% block contents %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <!-- <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>Business Casual - Start Bootstrap Theme</title>
+        <link rel="icon" type="image/x-icon" href="assets/favicon.ico" /> -->
+        <!-- Core theme CSS (includes Bootstrap)-->
+        <link href="{% static 'css/stylesintro.css' %}" rel="stylesheet" />
+    </head>
+    <body>
+        <header>
+            <!-- <h1 class="site-heading text-center text-faded d-none d-lg-block">
+                <span class="site-heading-upper text-primary mb-3">A Free Bootstrap Business Theme</span>
+                <span class="site-heading-lower">Business Casual</span>
+            </h1> -->
+        </header>
+        <!-- Navigation-->
+        <!-- <nav class="navbar navbar-expand-lg navbar-dark py-lg-4" id="mainNav">
+            <div class="container">
+                <a class="navbar-brand text-uppercase fw-bold d-lg-none" href="index.html">Start Bootstrap</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav mx-auto">
+                        <li class="nav-item px-lg-4"><a class="nav-link text-uppercase" href="index.html">Home</a></li>
+                        <li class="nav-item px-lg-4"><a class="nav-link text-uppercase" href="about.html">About</a></li>
+                        <li class="nav-item px-lg-4"><a class="nav-link text-uppercase" href="products.html">Products</a></li>
+                        <li class="nav-item px-lg-4"><a class="nav-link text-uppercase" href="store.html">Store</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav> -->
+        <section class="page-section">
+            <div class="container">
+                <div class="product-item">
+                    <div class="product-item-title d-flex">
+                        <div class="bg-faded p-5 d-flex ms-auto rounded">
+                            <h2 class="section-heading mb-01">
+                                <span class="section-heading-upper">
+                                    利便性を追及　業界標準のプラグインに幅広く対応
+                                </span>
+                                <a href="https://www.reaper.fm/">
+                                    <span class="section-heading-lower">
+                                        Reaper
+                                    </span>
+                                </a>
+                            </h2>
+                        </div>
+                    </div>
+                    <img class="product-item-img mx-auto d-flex rounded img-fluid mb-3 mb-lg-0" src="{% static 'assets/img/reaper.png' %}" alt="..." />
+                    <div class="product-item-description d-flex me-auto">
+                        <div class="bg-faded p-5 rounded">
+                            <p class="mb-01">
+                                Cockosによって開発されたMIDIシーケンス機能を搭載したDAW。
+                                <br>
+                                VSTやAudio Unitsなどの業界標準プラグイン形式に対応し、
+                                <br>
+                                標準的なオーディオ／ビデオファイルフォーマットの多くを読み込むことができる。
+                                <br>
+                                また、ReaScriptやJSFXといった機能拡張の仕組みが用意されており、
+                                <br>
+                                EEL2、Lua、Pythonでプラグイン等を記述できる。
+                                <br>
+                                動画ファイルのカットやトリミング等、
+                                可能な範囲で動画の音声を編集・置換ができる。
+                                <br>
+                                フェード、ワイプやクロスフェードのようなビデオエフェクトが利用可能である。
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="page-section">
+            <div class="container">
+                <div class="product-item">
+                    <div class="product-item-title d-flex">
+                        <div class="bg-faded p-5 d-flex me-auto rounded">
+                            <h2 class="section-heading mb-01">
+                                <span class="section-heading-upper">
+                                    一連の作業が瞬時に　あなたの思うがままに作曲
+                                </span>
+                                <a href="https://www.bandlab.com/products/cakewalk">
+                                    <span class="section-heading-lower">
+                                        Cakewalk by Bandlab
+                                    </span>    
+                                </a>
+                            </h2>
+                        </div>
+                    </div>
+                    <img class="product-item-img mx-auto d-flex rounded img-fluid mb-3 mb-lg-0" src="{% static 'assets/img/cakewalk.png' %}" alt="..." />
+                    <div class="product-item-description d-flex ms-auto">
+                        <div class="bg-faded p-5 rounded">
+                            <p class="mb-01">
+                                BandLab Technologiesによって開発されている無料のDAWソフトウェア。
+                                <br>
+                                ピアノロール、数値入力、譜面入力をサポートし、
+                                <br>
+                                音楽編集機能、記譜機能、サラウンドサウンド機能を提供。 
+                                <br>
+                                DirectX/DXi、VST/VSTiのプラグインフォーマットに対応し、
+                                <br>
+                                シンセサイザー、サンプラー、ドラムマシン等のソフトウェア音源やエフェクタが利用可。
+                                <br> 
+                                スライシングや破壊編集をする事無く、プロジェクト全体をクオンタイズする事が出来る。
+                                <br>
+                                OMFIファイルを用いることで、タイミング、テンポ、音量、パン情報を維持した状態で、
+                                <br>
+                                マルチトラック・オーディオのプロジェクトをアプリケーション間で交換する事が可能。
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="page-section">
+            <div class="container">
+                <div class="product-item">
+                    <div class="product-item-title d-flex">
+                        <div class="bg-faded p-5 d-flex ms-auto rounded">
+                            <h2 class="section-heading mb-0">
+                                <span class="section-heading-upper">
+                                    mac専用ソフト　充実したエフェクター機能
+                                </span>
+                                <a href="#">
+                                    <span class="section-heading-lower">
+                                        GarageBand
+                                    </span>
+                                </a>
+                            </h2>
+                        </div>
+                    </div>
+                    <img class="product-item-img mx-auto d-flex rounded img-fluid mb-3 mb-lg-0" src="{% static 'assets/img/garageband.jpg' %}" alt="..." />
+                    <div class="product-item-description d-flex me-auto">
+                        <div class="bg-faded p-5 rounded">
+                            <p class="mb-01">
+                                Appleが開発・販売するmacOS/iOS用の初心者向けの音楽制作ソフトウェア。
+                                <br>
+                                外部接続したMIDIキーボードや、コンピュータキーボードを使用しての操作ができる。
+                                <br>
+                                ギターやマイクからのリアル音源トラックも使用可能である。
+                                <br>
+                                デモ制作には十分な機能を擁しており、特にエフェクター機能に関しては、
+                                <br>
+                                5種のアンプと10種のエフェクターのシミュレーターが追加。
+                                <br>
+                                リアル音源トラックに対して、録音源のチューニングやタイミングの簡易補正や
+                                <br>
+                                エフェクト自動操作やテンポ変更が出来る。
+                                <br>
+                                また、ビデオレッスンが付属しており、現時点でギターとピアノの二種が存在。
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Core theme JS-->
+        <script src="{% static 'js/scriptsintro.js' %}"></script>
+    </body>
+</html>
+
+
+{% endblock %}

@@ -1,0 +1,282 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}{% endblock %}
+
+{% block active_diary_list %}active{% endblock %}
+
+{% block contents %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>My Playlist</title>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="description" content="My Podcast template project">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" type="text/css" href="{% static 'styles/bootstrap-4.1.2/bootstrap.min.css' %}">
+<link href="{% static 'plugins/font-awesome-4.7.0/css/font-awesome.min.css' %}" rel="stylesheet" type="text/css">
+<link href="{% static 'plugins/colorbox/colorbox.css' %}" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href="{% static 'styles/episodes.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'styles/episodes_responsive.css' %}">
+<link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}"> 
+<link rel="stylesheet" href="{% static 'css/style.css' %}"> 
+<style>
+.episode_name {
+	margin-top: 10px;
+  padding: 10px 0px 0px 0px;
+  float: left;
+}
+
+.jp-no-solution {
+	margin: 40px 0px 20px 0px;
+  padding: 20px 0px 20px 0px;
+  width: 500px;
+  height: 50px;
+	font-size: 16px;
+}
+</style>
+</head>
+
+<body>
+<div class="super_container">
+	<!-- Header -->
+	<header class="header trans_400">
+	</header>
+	<!-- Home -->
+	<div class="home">
+		<div class="parallax_background parallax-window" data-parallax="scroll" data-image-src="{% static 'images/cover3.jpg' %}" data-speed="0.8"></div>
+		<div class="home_container d-flex flex-column align-items-center justify-content-center">
+			<div class="home_content">
+				<div class="home_title">
+					<h1>TEACHER VOICE'S</h1>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Episodes -->
+	<div class="episodes">
+		<div class="container">
+			<!-- Sidebar -->
+			<div class="col-lg-3">
+				<!-- Add A New Song -->
+				<div class="col text-center add_but">
+					<div class="button_fill shows_button">
+						<a href="{% url 'kadai_app:group_music_create'%}">
+							Add A New Song
+						</a>
+					</div>							
+				</div>
+				<!-- Delete The Song -->
+				<div class="col text-center delete_but">
+					<div class="button_fill shows_button">
+						<a href="#">
+							Delete The Song
+						</a>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col">
+					<div class="season_links">
+						<ul class="d-flex flex-row align-items-start justify-content-center flex-wrap">
+							<div class="col-xl-3 col-md-3">
+								<div class="music_btn">
+									<a href="#" class="boxed-btn">Random Play</a>
+								</div>
+							</div>
+							<div class="col-xl-3 col-md-3">
+								<div class="music_btn">
+									<a href="#" class="boxed-btn">Priority Play</a>
+								</div>
+							</div>
+							<div class="col-xl-3 col-md-3">
+								<div class="music_btn">
+									<a href="#" class="boxed-btn">Normal Play</a>
+								</div>
+							</div>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row episodes_row">
+			<!-- Episodes -->
+			<div class="col-lg-9 episodes_col">
+				<div class="episodes_container">
+					<!-- Episode -->
+					<div class="episode d-flex flex-row align-items-start justify-content-start s1">
+						<input type="checkbox">
+						<div>
+							<div class="episode_image">
+								<img src="{% static 'images/episode_1.jpg' %}" alt="">
+							</div>
+						</div>
+						<div class="episode_content">
+							<div class="episode_name">
+								<a href="{% url 'kadai_app:play'%}">
+									MATUMIYA VOICE
+								</a>
+							</div>
+							<div class="episode_date">
+								<a href="{% url 'kadai_app:userpage'%}">
+									ビジネスマナーのお時間
+								</a>
+							</div>
+							<div class="jp-no-solution">
+								<span>松宮先生と電話練習</span>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- Episodes -->
+			<div class="col-lg-9 episodes_col">
+				<div class="episodes_container">
+					<!-- Episode -->
+					<div class="episode d-flex flex-row align-items-start justify-content-start s1">
+						<input type="checkbox">
+						<div>
+							<div class="episode_image">
+								<img src="{% static 'images/episode_1.jpg' %}" alt="">
+							</div>
+						</div>
+						<div class="episode_content">
+							<div class="episode_name">
+								<a href="{% url 'kadai_app:play'%}">
+									ISONO VOICE
+								</a>
+							</div>
+							<div class="episode_date">
+								<a href="{% url 'kadai_app:userpage'%}">
+									ビジネスマナーのお時間
+								</a>
+							</div>
+							<div class="jp-no-solution">
+								<span>磯野先生と電話練習</span>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- Episodes -->
+			<div class="col-lg-9 episodes_col">
+				<div class="episodes_container">
+					<!-- Episode -->
+					<div class="episode d-flex flex-row align-items-start justify-content-start s1">
+						<input type="checkbox">
+						<div>
+							<div class="episode_image">
+								<img src="{% static 'images/episode_1.jpg' %}" alt="">
+							</div>
+						</div>
+						<div class="episode_content">
+							<div class="episode_name">
+								<a href="{% url 'kadai_app:play'%}">
+									HORIKAWA VOICE
+								</a>
+							</div>
+							<div class="episode_date">
+								<a href="{% url 'kadai_app:userpage'%}">
+									ビジネスマナーのお時間
+								</a>
+							</div>
+							<div class="jp-no-solution">
+								<span>堀川先生と電話練習</span>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- Episodes -->
+			<div class="col-lg-9 episodes_col">
+				<div class="episodes_container">
+					<!-- Episode -->
+					<div class="episode d-flex flex-row align-items-start justify-content-start s1">
+						<input type="checkbox">
+						<div>
+							<div class="episode_image">
+								<img src="{% static 'images/episode_1.jpg' %}" alt="">
+							</div>
+						</div>
+						<div class="episode_content">
+							<div class="episode_name">
+								<a href="{% url 'kadai_app:play'%}">
+									KANNO VOICE
+								</a>
+							</div>
+							<div class="episode_date">
+								<a href="{% url 'kadai_app:userpage'%}">
+									ビジネスマナーのお時間
+								</a>
+							</div>
+							<div class="jp-no-solution">
+								<span>菅野先生と電話練習</span>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="row page_nav_row">
+		<div class="col">
+			<div class="page_nav d-flex flex-row align-items-center justify-content-center">
+				<ul class="d-flex flex-row">
+					<li class="active">
+						<a class="page_btn" href="#">
+							<i class="fa fa-angle-double-left" aria-hidden="true"></i>
+						</a>
+					</li>
+					<li class="active">
+						<a class="page_btn" href="#">
+							1
+						</a>
+					</li>
+					<li class="active">
+						<a class="page_btn" href="#">
+							2
+						</a>
+					</li>
+					<li class="active">
+						<a class="page_btn" href="#">
+							3
+						</a>
+					</li>
+					<li class="active">
+						<a class="page_btn" href="#">
+							4
+						</a>
+					</li>
+					<li class="active">
+						<a class="page_btn" href="#">
+							<i class="fa fa-angle-double-right" aria-hidden="true"></i>
+						</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</div>
+
+<script src="{% static 'js/jquery-3.3.1.min.js' %}"></script>
+<script src="{% static 'styles/bootstrap-4.1.2/popper.js' %}"></script>
+<script src="{% static 'styles/bootstrap-4.1.2/bootstrap.min.js' %}"></script>
+<script src="{% static 'plugins/greensock/TweenMax.min.js' %}"></script>
+<script src="{% static 'plugins/greensock/TimelineMax.min.js' %}"></script>
+<script src="{% static 'plugins/scrollmagic/ScrollMagic.min.js' %}"></script>
+<script src="{% static 'plugins/greensock/animation.gsap.min.js' %}"></script>
+<script src="{% static 'plugins/greensock/ScrollToPlugin.min.js' %}"></script>
+<script src="{% static 'plugins/colorbox/jquery.colorbox-min.js' %}"></script>
+<script src="{% static 'plugins/jPlayer/jquery.jplayer.min.js' %}"></script>
+<script src="{% static 'plugins/jPlayer/jplayer.playlist.min.js' %}"></script>
+<script src="{% static 'plugins/easing/easing.js' %}"></script>
+<script src="{% static 'plugins/progressbar/progressbar.min.js' %}"></script>
+<script src="{% static 'plugins/Isotope/isotope.pkgd.min.js' %}"></script>
+<script src="{% static 'plugins/parallax-js-master/parallax.min.js' %}"></script>
+<script src="{% static 'js/episodes.js' %}"></script>
+</body>
+</html>
+{% endblock %}

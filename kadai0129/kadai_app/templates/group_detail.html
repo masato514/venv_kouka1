@@ -1,0 +1,364 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block contents %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>My Playlist</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="My Podcast template project">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="{% static 'styles/bootstrap-4.1.2/bootstrap.min.css' %}">
+    <link href="{% static 'plugins/font-awesome-4.7.0/css/font-awesome.min.css' %}" rel="stylesheet" type="text/css">
+    <link href="{% static 'plugins/colorbox/colorbox.css' %}" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" type="text/css" href="{% static 'styles/episodes.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'styles/episodes_responsive.css' %}">
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <style>
+        .episode_name {
+            margin-top: 10px;
+            padding: 10px 0px 0px 0px;
+            float: left;
+        }
+
+        .jp-no-solution {
+            margin: 40px 0px 20px 0px;
+            padding: 20px 0px 20px 0px;
+            width: 500px;
+            height: 50px;
+            font-size: 16px;
+        }
+    </style>
+
+    <script type="text/javascript">
+        var flg = false;
+
+        function rdmflg() {
+            flg = true;
+        }
+
+        function ctnflg() {
+            flg = false;
+        }
+
+        function player() {
+            audio.play();
+            audio.addEventListener('ended', function () {
+                if (flg == true) {
+                    index = Math.floor(Math.random() * playlist.length);
+                    audio.src = playlist[index];
+                    audio.play();
+                } else {
+                    if (index < playlist.length - 1) {
+                        index++;
+                        audio.src = playlist[index];
+                        audio.play();
+                    } else {
+                        audio.src = playlist[0];
+                        index = 0;
+                        audio.play();
+                    }
+                }
+            });
+        }
+    </script>
+</head>
+
+<body>
+    <div class="super_container">
+        <!-- Header -->
+        <header class="header trans_400">
+        </header>
+        <!-- Home -->
+        <div class="home">
+            <div class="parallax_background parallax-window" data-parallax="scroll"
+                data-image-src="{% static 'images/coverpage4.jpg' %}" data-speed="0.8"></div>
+            <div class="home_container d-flex flex-column align-items-center justify-content-center">
+                <div class="home_content">
+                    <div class="home_title">
+                        <h1>
+                            MYPLAYLIST
+                        </h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Episodes -->
+        <div class="episodes">
+            <div class="container">
+                <!-- Sidebar -->
+                <div class="col-lg-3">
+                    <!-- Add A New Song -->
+                    <div class="col text-center add_but">
+                        <div class="button_fill shows_button">
+                            <a href="{% url 'kadai_app:group_music_create' %}">
+                                Add A New Song
+                            </a>
+                        </div>
+                    </div>
+                    <!-- Delete The Song -->
+                    <div class="col text-center delete_but">
+                        <div class="button_fill shows_button">
+                            <a href="{% url 'kadai_app:group_update' group %}">
+                                Delete The Song
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <div class="season_links">
+                            <ul class="d-flex flex-row align-items-start justify-content-center flex-wrap">
+                                <div class="col-xl-3 col-md-3">
+                                    <div class="music_btn">
+                                        <input class="boxed-btn" id="button1" type="button" value="random"
+                                            onclick="rdmflg()">
+                                    </div>
+                                </div>
+                                <div class="col-xl-3 col-md-3">
+                                    <div class="music_btn">
+                                        <input class="boxed-btn" id="button1" type="button" value="Priority"
+                                            onclick="rdmflg()">
+                                    </div>
+                                </div>
+                                <div class="col-xl-3 col-md-3">
+                                    <div class="music_btn">
+                                        <input class="boxed-btn" id="button2" type="button" value="continue"
+                                            onclick="ctnflg()">
+                                    </div>
+                                </div>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row episodes_row">
+                <!-- Episodes -->
+                <div class="col-lg-9 episodes_col">
+                    <div class="episodes_container">
+                        {% for g in grouped_l %}
+                        <div class="episode d-flex flex-row align-items-start justify-content-start s1">
+                            <input type="checkbox">
+                            <div class="episode_image">
+                                {% if g.upload_music.music_photo %}
+                                <img src="{{ g.upload_music.music_photo.url }}" alt="">
+                                {% else %}
+                                <img src="{% static 'images/no_image2.jpg' %}" alt="">
+                                {% endif %}
+                            </div>
+                            <div class="episode_content">
+                                <div class="episode_name">
+                                    <a href="{% url 'kadai_app:play_detail' g.upload_music.pk %}">
+                                        {{ g.upload_music.title }}
+                                    </a>
+                                    
+                                </div>
+                                <div class="episode_date">
+                                    <a href="{% url 'kadai_app:userpage'%}">
+                                        {{ g.upload_music.user }}
+                                    </a>
+                                    <a>
+                                        {{ g.num }}
+                                    </a>
+                                </div>
+                                <div class="jp-no-solution">
+                                    <span>{{g.upload_music.about_song|truncatechars:30}}</span>
+                                </div>
+                                <h5></h5>
+                                <!--必要-->
+                                <div id="{{ forloop.counter }}" title="{{ g.upload_music.attach1.url }}" class="{{ group.priority }}"></div>
+        
+                                </div>
+                            </div>
+                        </div>
+                        {% empty %}
+                        <p>音楽がありません</p>
+                        {% endfor %}
+
+                        <audio id='audio'></audio>
+
+            <script type="text/javascript">  
+                var pry_l = [];
+                var pry_num = 0;
+                var rdm_num = 0; 
+                var index_num = 0;
+                var listnum = document.querySelectorAll( "h5" );
+                var playlist = [];
+
+                for(var x = 1; x <= listnum.length; x++){
+                    var y = String(x)
+                    var pla =document.getElementById(y).title;
+                    // alert(document.getElementById(y).id)
+                    playlist.push(pla);
+                    
+	                var class_num =document.getElementById(y);
+                    pry_num = class_num.classList.value;
+                    pry_l.push(pry_num);
+                }
+                
+                var audio = document.createElement('audio');
+                document.body.appendChild(audio);
+                audio.style.width = '100%';
+                // audio.style.height = 'auto muted';
+                audio.classList.add('sticky-bottom');
+                audio.volume = 0.2;
+                audio.src = playlist[0];
+                var index = 0;
+                audio.controls = true;
+                player();
+                var flg_num = 0;
+
+                function rdmflg(){
+                    flg_num = 0;
+                }
+
+                function ctnflg(){
+                    flg_num = 1;
+                }
+
+                function pryflg(){
+                    flg_num = 2;
+                }
+
+                function list_mul(l_1, l_2){
+                    let return_list = []
+                    if (l_1.length == l_2.length){
+                        for (var k = 0; k < l_1.length; k++){
+                            return_list[k] = (l_1[k] + 1) * l_2[k];
+                        }
+                        return return_list;
+                    }else{
+                        return false;
+                    }
+                }
+
+                function player(){
+                        audio.play();
+        
+                        
+                        audio.addEventListener('ended', function(){
+                            if(flg_num == 1){
+                                // ランダム再生（flg＝1の時）
+                                index = Math.floor(Math.random() * playlist.length);
+                                audio.src = playlist[index];
+                                audio.play();
+                            }else if(flg_num == 0){
+                                // 順番に再生（flg=0）
+                                if (index < playlist.length -1) {
+                                    index++;
+                                    audio.src = playlist[index];
+                                    audio.play();
+                                }else {
+                                    audio.src = playlist[0];
+                                    index = 0;
+                                    audio.play();
+                                }
+                            }else{
+                                var max_num = pry_l.reduce(function(a,b) {
+                                    return Number(a)+Number(b);                                 
+                                });
+
+                                rdm_num = Math.floor(Math.random() * max_num + 1);
+                                var g_num=0;
+                                // 優先再生（flg=2）
+                                for(var i = 0; i < listnum.length; i++){
+                                    g_num += Number(pry_l[i]);
+                                    if (g_num >= rdm_num) {
+                                        index_num = i;
+                                        break;
+                                    }else{
+                                        false;
+                                    }
+                                }
+                                
+                                alert('max_num =' + max_num + '/// rdm_num = '+ rdm_num + ' ///index_num = ' + index_num + '//pry_l:' + pry_l + '///g_num =' + g_num);
+                                
+
+                                // 再生する曲を設定
+                                
+                                audio.src = playlist[index_num];
+                                audio.play();
+                            }
+                        });
+                }
+            </script>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row page_nav_row">
+            <div class="col">
+                <div class="page_nav d-flex flex-row align-items-center justify-content-center">
+                    <!--ページネーション処理-->
+                    {% if is_paginated %}
+                    <ul class="d-flex flex-row">
+                        <!--前ページへのリンク-->
+                        {% if page_obj.has_previous %}
+                        <li class="active">
+                            <a class="page_btn" href="?page={{ page_obj.previous_page_number }}">
+                                <span aria-hidden="true">&laquo;</span>
+                            </a>
+                        </li>
+                        {% endif %}
+
+                        <!--ページ数表示-->
+                        {% for page_num in page_obj.paginator.page_range %}
+                        {% if page_obj.number == page_num %}
+                        <li class="active">
+                            <a class="page_btn" href="#">
+                                {{ page_num }}
+                            </a>
+                        </li>
+                        {% else %}
+                        <li class="active">
+                            <a class="page_btn" href="?page={{ page_num }}">
+                                {{ page_num }}
+                            </a>
+                        </li>
+                        {% endif %}
+                        {% endfor %}
+                        <!--次ページへのリンク-->
+                        {% if page_obj.has_next %}
+                        <li class="active">
+                            <a class="page_btn" href="?page={{ page_obj.next_page_number }}">
+                                <span aria-hidden="true">&raquo;</span>
+                            </a>
+                        </li>
+                        {% endif %}
+                    </ul>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        <!-- <hr>
+        {{ group }}
+        <a class="btn btn-success mt-5 mb-3" href="{% url 'kadai_app:group_update' group %}">編集</a>
+         -->
+    </div>
+
+    <script src="{% static 'js/jquery-3.3.1.min.js' %}"></script>
+    <script src="{% static 'styles/bootstrap-4.1.2/popper.js' %}"></script>
+    <script src="{% static 'styles/bootstrap-4.1.2/bootstrap.min.js' %}"></script>
+    <script src="{% static 'plugins/greensock/TweenMax.min.js' %}"></script>
+    <script src="{% static 'plugins/greensock/TimelineMax.min.js' %}"></script>
+    <script src="{% static 'plugins/scrollmagic/ScrollMagic.min.js' %}"></script>
+    <script src="{% static 'plugins/greensock/animation.gsap.min.js' %}"></script>
+    <script src="{% static 'plugins/greensock/ScrollToPlugin.min.js' %}"></script>
+    <script src="{% static 'plugins/colorbox/jquery.colorbox-min.js' %}"></script>
+    <script src="{% static 'plugins/jPlayer/jquery.jplayer.min.js' %}"></script>
+    <script src="{% static 'plugins/jPlayer/jplayer.playlist.min.js' %}"></script>
+    <script src="{% static 'plugins/easing/easing.js' %}"></script>
+    <script src="{% static 'plugins/progressbar/progressbar.min.js' %}"></script>
+    <script src="{% static 'plugins/Isotope/isotope.pkgd.min.js' %}"></script>
+    <script src="{% static 'plugins/parallax-js-master/parallax.min.js' %}"></script>
+    <script src="{% static 'js/episodes.js' %}"></script>
+</body>
+
+</html>
+{% endblock %}

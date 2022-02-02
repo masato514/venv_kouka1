@@ -1,0 +1,396 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Playing Music{% endblock %}
+
+{% block active_diary_list %}active{% endblock %}
+
+{% block contents %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Play</title>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="description" content="My Podcast template project">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" type="text/css" href="{% static 'styles/bootstrap-4.1.2/bootstrap.min.css' %}">
+<link href="{% static 'plugins/font-awesome-4.7.0/css/font-awesome.min.css' %}" rel="stylesheet" type="text/css">
+<link href="{% static 'plugins/colorbox/colorbox.css' %}" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href="{% static 'styles/episodes.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'styles/episodes_responsive.css' %}">
+
+
+<!-- CSS here -->
+<link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+<link rel="stylesheet" href="{% static 'css/owl.carousel.min.css' %}">
+<link rel="stylesheet" href="{% static 'css/magnific-popup.css' %}">
+<link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}">
+<link rel="stylesheet" href="{% static 'css/themify-icons.css' %}">
+<link rel="stylesheet" href="{% static 'css/nice-select.css' %}">
+<link rel="stylesheet" href="{% static 'css/flaticon.css' %}">
+<link rel="stylesheet" href="{% static 'css/gijgo.css' %}">
+<link rel="stylesheet" href="{% static 'css/animate.css' %}">
+<link rel="stylesheet" href="{% static 'css/slicknav.css' %}">
+<link rel="stylesheet" href="{% static 'css/style.css' %}">
+<!-- <link rel="stylesheet" href="css/responsive.css"> -->
+<style>
+	.audio_img{
+		margin: 20px 20px 20px 20px;
+		width: 100px;
+		height: 100px;
+	}
+</style>
+</head>
+
+<body>
+<div class="super_container">
+	<!-- Home -->
+	<div class="home">
+		<div class="parallax_background parallax-window" data-parallax="scroll" data-image-src="{% static 'images/about.jpg' %}" data-speed="0.8"></div>
+		<div class="home_container d-flex flex-column align-items-center justify-content-center">
+			<div class="home_content">
+				<div class="home_title">
+					<h1>
+						PLAY STATION
+					</h1>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!--================Play Area =================-->
+	<section class="blog_area single-post-area section-padding">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-8 posts-list">
+
+					<div class="single-post">
+						<div class="feature-img">
+							<img class="img-fluid" src="img/blog/single_blog_1.png" alt="">
+						</div>
+						<div class="blog_details">
+							<h2>
+								<img class="audio_img" src="{% static 'img/post/post_3.png' %}"alt="">
+								{{ object.title }}
+							</h2>
+							<div class="track track_home">
+								<audio id="radio" class = "audio_song" controls autoplay loop>
+									あなたのブラウザーは <code>audio</code>要素をサポートしていません。
+									<source src="{{ object.attach1 }}">
+
+									<!-- <div id="a" title="{{ object.attach1.url }}"></div>
+									<div id="b" title="{{ object.attach2.url }}"></div>
+									<div id="c" title="{{ object.attach3.url }}"></div>
+			
+									<script type="text/javascript">
+										alert("音が出ます！")
+				
+										/**var playlist = [];
+												
+												for (var i = 0; i < 5; i++) {
+														document.getElementById('{i}').style.display="none";
+														var pla = i.title;
+														playlist.push(pla);
+												}*/
+												
+												document.getElementById('a').style.display="none";
+												document.getElementById('b').style.display="none";
+												document.getElementById('c').style.display="none";
+												
+												var pla = a.title;
+												var plb = b.title;
+												var plc = c.title;
+										
+												var playlist = [];
+												playlist.push(pla, plb, plc);
+				
+												document.write(playlist)
+				
+												var audio = document.createElement('audio');
+												document.body.appendChild(audio);
+												audio.style.width = '100%';
+												audio.style.height = 'auto muted';
+												audio.controls = true;
+												audio.volume = 0.2;
+				
+												audio.src = playlist[0];
+												audio.play();
+				
+												var index = 0;
+												audio.addEventListener('ended', function(){
+														index++;
+														if (index < playlist.length) {
+																audio.src = playlist[index];
+																audio.play();
+														}
+														else {
+																audio.src = playlist[0];
+																audio.play();
+																index = 0;
+														}
+														});
+										</script>				 -->
+								</audio>
+							</div>
+							<ul class="blog-info-link mt-3 mb-4">
+								<li>
+									<a href="#">
+										<i class="fa fa-heart">
+								    </i>
+										  4 likes
+										</a>
+									</li>
+								<li>
+									<a href="{% url 'kadai_app:mypage' %}">
+										<i class="fa fa-plus"></i>
+										Add to Playlist
+									</a>
+								</li>
+								<li>
+									<a href="#">
+										<i class="fa fa-edit"></i>
+										Remake
+									</a>
+								</li>
+								<li>
+									<a href="#">
+										<i class="fa fa-share"></i>
+										Share
+									</a>
+								</li>
+							</ul>
+						</div> 
+					</div>
+
+                    <!--author area-->
+					<div class="blog-author">
+						<div class="media align-items-center">	
+
+							<div class="media post_item">	
+								<div class="media-body">
+									<ul class="blog-info-link mt-3 mb-4">
+									<img src="{% static 'img/blog/author.png' %}" alt="">
+									<p>
+										<a href="#">
+											<i class="fa fa-user-plus"></i>
+											Follow
+										</a>
+									</p>
+									</ul>		
+								</div>
+							</div>
+	 
+							<div class="media-body">
+								<a href="{% url 'kadai_app:userpage'%}">
+									<h4>Author</h4>
+								</a>
+								<p>Song's information: Second divided from form fish beast made. Every of seas all gathered use saying</p>
+							</div>
+						</div>
+					</div>
+
+					<!--comment area-->
+					<div class="comments-area">
+						<div class="comment-form">
+							<h4>Leave a Comment</h4>
+							<form class="form-contact comment_form" action="#" id="commentForm">
+								<div class="row">
+									<div class="col-12">
+										<div class="form-group">
+											<textarea class="form-control w-100" name="comment" id="comment" cols="30" rows="9"
+												placeholder="Write Comment"></textarea>
+										</div>
+									</div>
+								</div>
+								<div class="form-group">
+									<button type="submit" class="button button-contactForm btn_1 boxed-btn">Send</button>
+								</div>
+							</form>
+						</div>
+						<h4>05 Comments</h4>
+							<div class="comment-list">
+								<div class="single-comment justify-content-between d-flex">
+									<div class="user justify-content-between d-flex">
+										<div class="thumb">
+											<img src="{% static 'img/comment/comment_1.png' %}" alt="">
+										</div>
+										<div class="desc">
+											<h5><a href="{% url 'kadai_app:userpage'%}">Emilly Blunt</a></h5>
+											<p class="comment">
+												Multiply sea night grass fourth day sea lesser rule open subdue female fill which them
+												Blessed, give fill lesser bearing multiply sea night grass fourth day sea lesser
+											</p>
+											<div class="d-flex justify-content-between">
+												<div class="d-flex align-items-center">
+													
+													<p class="date">December 4, 2017 at 3:12 pm </p>
+												</div>
+												<div class="reply-btn">
+													<a href="#" class="btn-reply text-uppercase">reply</a>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+
+							<div class="comment-list">
+								<div class="single-comment justify-content-between d-flex">
+									<div class="user justify-content-between d-flex">
+										<div class="thumb">
+											<img src="{% static 'img/comment/comment_2.png' %}" alt="">
+										</div>
+										<div class="desc">
+											<h5><a href="{% url 'kadai_app:userpage'%}">Jack Nesin</a></h5>
+											<p class="comment">
+												Multiply sea night grass fourth day sea lesser rule open subdue female fill which them
+												Blessed, give fill lesser bearing multiply sea night grass fourth day sea lesser
+											</p>
+											<div class="d-flex justify-content-between">
+												<div class="d-flex align-items-center">
+													
+													<p class="date">December 4, 2017 at 3:12 pm </p>
+												</div>
+												<div class="reply-btn">
+													<a href="#" class="btn-reply text-uppercase">reply</a>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+
+							<div class="comment-list">
+								<div class="single-comment justify-content-between d-flex">
+									<div class="user justify-content-between d-flex">
+										<div class="thumb">
+											<img src="{% static 'img/comment/comment_3.png' %}" alt="">
+										</div>
+										<div class="desc">
+											<h5> <a href="{% url 'kadai_app:userpage'%}">Emma Edion</a></h5>
+											<p class="comment">
+												Multiply sea night grass fourth day sea lesser rule open subdue female fill which them
+												Blessed, give fill lesser bearing multiply sea night grass fourth day sea lesser
+											</p>
+											<div class="d-flex justify-content-between">
+												<div class="d-flex align-items-center">
+													<p class="date">December 4, 2017 at 3:12 pm </p>
+												</div>
+												<div class="reply-btn">
+													<a href="#" class="btn-reply text-uppercase">reply</a>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+					</div>
+						 
+			    </div>
+
+				<!--tag-->
+				<div class="col-lg-4">
+					<div class="blog_right_sidebar">
+
+						<aside class="single_sidebar_widget tag_cloud_widget">
+							<h4 class="widget_title">Tag</h4>
+								<ul class="list">
+									<li><a href="#">Kpop</a></li>
+									<li><a href="#">love</a></li>	
+									<li><a href="#">travel</a></li>
+								</ul>
+						</aside>
+
+						<aside class="single_sidebar_widget popular_post_widget">
+							<h3 class="widget_title">Remake song</h3>
+								<div class="media post_item">
+									<img src="{% static 'img/post/post_1.png' %}" alt="post">
+									<div class="media-body">
+										<a href="{% url 'kadai_app:play'%}">
+											<h3>New song's name1</h3>
+										</a>
+										<p>Author</p>
+									</div>
+								</div>
+								<div class="media post_item">
+									<img src="{% static 'img/post/post_2.png' %}" alt="post">
+										<div class="media-body">
+											<a href="{% url 'kadai_app:play'%}">
+												<h3>New song's name2</h3>
+											</a>
+											<p>Author</p>
+										</div>
+								</div>
+								<div class="media post_item">
+									<img src="{% static 'img/post/post_3.png' %}" alt="post">
+									<div class="media-body">
+										<a href="{% url 'kadai_app:play'%}">
+											<h3>New song's name3</h3>
+										</a>
+										<p>Author</p>
+									</div>
+								</div>
+								<div class="media post_item">
+									<img src="{% static 'img/post/post_4.png' %}" alt="post">
+									    <div class="media-body">
+										    <a href="{% url 'kadai_app:play'%}">
+												<h3>New song's name4</h3>
+											</a>
+											<p>Author</p>
+									    </div>
+								</div>
+						</aside> 
+
+					</div>
+				</div>
+
+			 </div>
+		</div>
+    </section>
+ <!--================ Blog Area end =================-->
+
+</div>
+
+ <!-- JS here -->
+ <script src="{% static 'js/vendor/modernizr-3.5.0.min.js' %}"></script>
+ <script src="{% static 'js/vendor/jquery-1.12.4.min.js' %}"></script>
+ <script src="{% static 'js/popper.min.js' %}"></script>
+ <script src="{% static 'js/bootstrap.min.js' %}"></script>
+ <script src="{% static 'js/owl.carousel.min.js' %}"></script>
+ <script src="{% static 'js/isotope.pkgd.min.' %}js"></script>
+ <script src="{% static 'js/ajax-form.js' %}"></script>
+ <script src="{% static 'js/waypoints.min.js' %}"></script>
+ <script src="{% static 'js/jquery.counterup.min.js' %}"></script>
+ <script src="{% static 'js/imagesloaded.pkgd.min.js' %}"></script>
+ <script src="{% static 'js/scrollIt.js' %}"></script>
+ <script src="{% static 'js/jquery.scrollUp.min.js' %}"></script>
+ <script src="{% static 'js/wow.min.js' %}"></script>
+ <script src="{% static 'js/nice-select.min.js' %}"></script>
+ <script src="{% static 'js/jquery.slicknav.min.js' %}"></script>
+ <script src="{% static 'js/jquery.magnific-popup.min.js' %}"></script>
+ <script src="{% static 'js/plugins.js' %}"></script>
+ <script src="{% static 'js/gijgo.min.js' %}"></script>
+
+ <!--contact js-->
+ <script src="{% static 'js/main.js' %}"></script>
+ <script>
+		$('#datepicker').datepicker({
+				iconsLibrary: 'fontawesome',
+				icons: {
+				 rightIcon: '<span class="fa fa-caret-down"></span>'
+		 }
+		});
+		$('#datepicker2').datepicker({
+				iconsLibrary: 'fontawesome',
+				icons: {
+				 rightIcon: '<span class="fa fa-caret-down"></span>'
+		 }
+
+		});
+</script>
+</body>
+</html>
+
+
+{% endblock %}
