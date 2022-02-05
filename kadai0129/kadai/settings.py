@@ -48,6 +48,8 @@ INSTALLED_APPS = [
     'allauth',
     'allauth.account',
     
+    'django_ses',
+    
 ]
 
 MIDDLEWARE = [
@@ -88,7 +90,7 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'kadai',
-        'USER': 'postgres',
+        'USER': 'app_admin',
         'PASSWORD': 'masan0514',
         # 'PASSWORD': 'Ike77mario',
         'HOST': '',
@@ -150,22 +152,23 @@ LOGGING = {
     'loggers': {
         # Djangoが利用するロガー
         'django': {
-            'handlers': ['console'],
+            'handlers': ['file'],
             'level': 'INFO',
         },
         # kadai_appアプリケーションが利用するロガー
         'kadai_app': {
-            'handlers': ['console'],
+            'handlers': ['file'],
             'level': 'INFO',
         },
     },
 
     # ハンドラの設定
     'handlers': {
-        'console': {
+        'file': {
             'level': 'INFO',
             'class': 'logging.handlers.TimedRotatingFileHandler',
-            'formatter': 'dev',
+            'filename':os.path.join(BASE_DIR, 'logs/django.log'),
+            'formatter': 'prod',
             'when':'D',
             'interval':1,
             'backupCount':7,
@@ -174,7 +177,7 @@ LOGGING = {
 
     # フォーマッタの設定
     'formatters': {
-        'dev': {
+        'prod': {
             'format': '\t'.join([
                 '%(asctime)s',
                 '[%(levelname)s]',
@@ -186,7 +189,13 @@ LOGGING = {
 }
 
 AUTH_USER_MODEL = 'accounts.CustomUser'
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+# EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+EMAIL_FILE_PATH = '/home/app_admin/log'
+EMAIL_HOST = 'smtp-mail.outlook.com'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'ykh2035259@stu.o-hara.ac.jp'
+EMAIL_HOST_PASSWORD = 'SAN1-4_san'
+EMAIL_USE_TLS = True
 
 # EMAIL_HOST_USERとEMAIL_HOST_PASSWORDはベタ書きするとgit pushした時にセキュリティインシデントとなるため注意
 # DBに格納するか、OSの環境変数ファイルに書くことをオススメ
@@ -218,7 +227,7 @@ ACCOUNT_LOGOUT_ON_GET = True
 ACCOUNT_EMAIL_SUBJECT_PREFIX = ''
 
 # デフォルトのメール送信元を設定
-DEFAULT_FROM_EMAIL = 'admin@example.com'
+DEFAULT_FROM_EMAIL = 'ykh2035259@stu.o-hara.ac.jp'
 
 #MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
